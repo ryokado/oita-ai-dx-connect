@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OITA AI/DX CONNECT 2026</title>
+  <meta name="description" content="AI/DXスタートアップと大分の地元企業をつなぐマッチングイベント。2026年4月開催。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a1628;
+      color: #e0e6ef;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ===== Utility ===== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #8b5cf6;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-lead {
+      font-size: 1rem;
+      color: #94a3b8;
+      max-width: 640px;
+      line-height: 1.9;
+    }
+
+    /* ===== Scroll Animation ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== Header ===== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 0 24px;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .header.is-scrolled {
+      background: rgba(10, 22, 40, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .header-logo {
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .header-logo span {
+      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .header-nav a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #94a3b8;
+      transition: color 0.25s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .header-nav a:hover {
+      color: #fff;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 28px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.35);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 1100;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #e0e6ef;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger.is-open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.is-open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.is-open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(59, 130, 246, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 50% at 10% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Animated grid lines */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(96, 165, 250, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(96, 165, 250, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #a78bfa;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 100px;
+      margin-bottom: 32px;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #a78bfa;
+      border-radius: 50%;
+      animation: pulse-dot 2s ease infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title .gradient {
+      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: #94a3b8;
+      margin-bottom: 40px;
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .hero-meta-icon {
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #60a5fa;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .btn-hero {
+      padding: 16px 40px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-hero-primary {
+      color: #fff;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    }
+
+    .btn-hero-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-hero-secondary {
+      color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-hero-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: #475569;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      animation: float 3s ease infinite;
+    }
+
+    .scroll-indicator-line {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, #475569, transparent);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ===== About ===== */
+    .about {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: #94a3b8;
+      margin-bottom: 20px;
+      line-height: 2;
+    }
+
+    .about-features {
+      display: grid;
+      gap: 20px;
+    }
+
+    .about-feature-card {
+      padding: 28px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .about-feature-card:hover {
+      border-color: rgba(99, 102, 241, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .about-feature-icon {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .about-feature-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .about-feature-desc {
+      font-size: 0.875rem;
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    /* ===== Speakers ===== */
+    .speakers {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .speakers::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.03) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .speakers .container {
+      position: relative;
+    }
+
+    .speakers-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .speakers-header .section-lead {
+      margin: 0 auto;
+    }
+
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .speaker-card {
+      padding: 36px 28px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .speaker-card:hover {
+      border-color: rgba(99, 102, 241, 0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .speaker-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      overflow: hidden;
+      padding: 12px;
+    }
+
+    .speaker-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .speaker-category {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    .speaker-category.cat-work {
+      color: #60a5fa;
+      background: rgba(96, 165, 250, 0.1);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+    }
+
+    .speaker-category.cat-ai {
+      color: #a78bfa;
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.2);
+    }
+
+    .speaker-category.cat-hr {
+      color: #34d399;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+    }
+
+    .speaker-name {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .speaker-company {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+
+    .speaker-desc {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      line-height: 1.8;
+    }
+
+    /* ===== Track Record ===== */
+    .track-record {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .track-record-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .track-record-header .section-lead {
+      margin: 0 auto;
+    }
+
+    .track-record-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .track-record-card {
+      padding: 32px 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .track-record-card:hover {
+      border-color: rgba(99, 102, 241, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .track-record-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      color: #60a5fa;
+      background: rgba(96, 165, 250, 0.1);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+    }
+
+    .track-record-company {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .track-record-desc {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .track-record-result {
+      font-size: 0.8rem;
+      color: #60a5fa;
+      font-weight: 500;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* ===== Program ===== */
+    .program {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .program::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.03) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .program .container {
+      position: relative;
+    }
+
+    .program-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .program-header .section-lead {
+      margin: 0 auto;
+    }
+
+    .program-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .program-card {
+      position: relative;
+      padding: 36px 28px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 20px;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+
+    .program-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--card-color-start), var(--card-color-end));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .program-card:hover {
+      border-color: rgba(99, 102, 241, 0.2);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .program-card:hover::before {
+      opacity: 1;
+    }
+
+    .program-card:nth-child(1) { --card-color-start: #3b82f6; --card-color-end: #60a5fa; }
+    .program-card:nth-child(2) { --card-color-start: #8b5cf6; --card-color-end: #a78bfa; }
+    .program-card:nth-child(3) { --card-color-start: #6366f1; --card-color-end: #818cf8; }
+
+    .program-card-part {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+
+    .program-card-time {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #60a5fa;
+      margin-bottom: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .program-card-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .program-card-desc {
+      font-size: 0.875rem;
+      color: #64748b;
+      line-height: 1.8;
+    }
+
+    .program-card-duration {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #475569;
+      padding: 4px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 100px;
+    }
+
+    /* Timetable */
+    .timetable {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .timetable-title {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 32px;
+    }
+
+    .timetable-item {
+      display: flex;
+      gap: 24px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      align-items: center;
+    }
+
+    .timetable-item:last-child {
+      border-bottom: none;
+    }
+
+    .timetable-time {
+      flex-shrink: 0;
+      width: 120px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #60a5fa;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timetable-content {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .timetable-break {
+      color: #475569;
+      font-style: italic;
+    }
+
+    .timetable-detail {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    /* ===== Outline ===== */
+    .outline {
+      padding: 120px 0;
+    }
+
+    .outline-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .outline-header .section-lead {
+      margin: 0 auto;
+    }
+
+    .outline-card {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 24px;
+    }
+
+    .outline-table {
+      width: 100%;
+    }
+
+    .outline-row {
+      display: flex;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .outline-row:last-child {
+      border-bottom: none;
+    }
+
+    .outline-label {
+      flex-shrink: 0;
+      width: 140px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+
+    .outline-value {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      position: relative;
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 72px 40px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 32px;
+    }
+
+    .cta-title {
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .cta-desc {
+      font-size: 0.95rem;
+      color: #94a3b8;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 56px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(99, 102, 241, 0.4);
+    }
+
+    .cta-note {
+      margin-top: 20px;
+      font-size: 0.78rem;
+      color: #475569;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      padding: 64px 0 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-logo {
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo span {
+      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-desc {
+      font-size: 0.82rem;
+      color: #475569;
+      line-height: 1.8;
+      max-width: 360px;
+    }
+
+    .footer-heading {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #94a3b8;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .footer-contact p {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .footer-contact a {
+      color: #60a5fa;
+      transition: color 0.2s ease;
+    }
+
+    .footer-contact a:hover {
+      color: #93c5fd;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.75rem;
+      color: #334155;
+    }
+
+    /* ===== Mobile Responsive ===== */
+    @media (max-width: 768px) {
+      .header-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(10, 22, 40, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        gap: 32px;
+        padding: 40px;
+        transition: right 0.35s ease;
+        border-left: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .header-nav.is-open {
+        right: 0;
+      }
+
+      .header-nav a {
+        font-size: 1rem;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero {
+        padding: 100px 24px 60px;
+        min-height: auto;
+        min-height: 100svh;
+      }
+
+      .hero-meta {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .hero-cta {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-hero {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .speakers-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .track-record-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .program-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .timetable-item {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .timetable-time {
+        width: auto;
+      }
+
+      .outline-card {
+        padding: 28px 20px;
+      }
+
+      .outline-row {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .outline-label {
+        width: auto;
+      }
+
+      .cta-inner {
+        padding: 48px 24px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .scroll-indicator {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* ===== Mobile nav overlay ===== */
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    .nav-overlay.is-active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#" class="header-logo"><span>OITA AI/DX CONNECT</span></a>
+      <nav class="header-nav" id="headerNav">
+        <a href="#about">About</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#program">Program</a>
+        <a href="#outline">Outline</a>
+        <a href="#entry" class="btn-primary">参加申込</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">2026.04.○○</div>
+      <h1 class="hero-title">
+        <span class="gradient">OITA</span><br>
+        <span class="gradient">AI/DX CONNECT</span><br>
+        <span style="font-size: 0.5em; color: #94a3b8; font-weight: 500;">2026</span>
+      </h1>
+      <p class="hero-subtitle">
+        AI/DXスタートアップと大分の地元企業をつなぐ<br>
+        マッチングイベント
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="hero-meta-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          2026年4月○○日
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          14:00 - 16:30
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          大分市内（会場調整中）
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="#entry" class="btn-hero btn-hero-primary">参加申込はこちら</a>
+        <a href="#program" class="btn-hero btn-hero-secondary">プログラムを見る</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      SCROLL
+      <div class="scroll-indicator-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text fade-up">
+          <span class="section-label">About</span>
+          <h2 class="section-title">テクノロジーの力で<br>大分の未来を切り拓く</h2>
+          <p>「OITA AI/DX CONNECT 2026」は、AI・DX領域で革新的なソリューションを持つスタートアップと、デジタルトランスフォーメーションに取り組む大分の地元企業をつなぐマッチングイベントです。</p>
+          <p>株式会社エフベンチャーズと社会保険労務士法人 HRTrustの共催により、スタートアップのピッチ、AI×DX事例のトークセッション、そして直接対話できる交流会を通じて、新たなビジネス連携の機会を創出します。</p>
+        </div>
+        <div class="about-features fade-up">
+          <div class="about-feature-card">
+            <div class="about-feature-icon">&#x1F680;</div>
+            <h3 class="about-feature-title">スタートアップピッチ</h3>
+            <p class="about-feature-desc">AI/DX領域の注目スタートアップが、最新のプロダクト・サービスを直接プレゼンテーション。</p>
+          </div>
+          <div class="about-feature-card">
+            <div class="about-feature-icon">&#x1F4A1;</div>
+            <h3 class="about-feature-title">AI×DXトークセッション</h3>
+            <p class="about-feature-desc">実際のAI・DX導入事例を交えたトークセッションで、最新トレンドと活用のヒントを学ぶ。</p>
+          </div>
+          <div class="about-feature-card">
+            <div class="about-feature-icon">&#x1F91D;</div>
+            <h3 class="about-feature-title">交流会・マッチング</h3>
+            <p class="about-feature-desc">スタートアップと地元企業が直接対話し、具体的なビジネス連携の可能性を探る。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Speakers (登壇企業) ===== -->
+  <section class="speakers" id="speakers">
+    <div class="container">
+      <div class="speakers-header fade-up">
+        <span class="section-label">Speakers</span>
+        <h2 class="section-title">登壇・ピッチ企業</h2>
+        <p class="section-lead">AI/DX領域で革新的なサービスを展開する注目スタートアップが登壇します。</p>
+      </div>
+
+      <div class="speakers-grid">
+        <div class="speaker-card fade-up">
+          <div class="speaker-icon"><img src="https://timee.co.jp/_assets/reHeader-logo.DCBMN3ti.svg" alt="タイミー ロゴ"></div>
+          <span class="speaker-category cat-work">WorkTech</span>
+          <h3 class="speaker-name">タイミー</h3>
+          <p class="speaker-company">株式会社タイミー（東証グロース上場）</p>
+          <p class="speaker-desc">働きたい時間と働いてほしい時間をマッチングするスキマバイトサービス。面接・履歴書なしで即日働ける仕組みを提供し、ユーザー数700万人超、導入事業者数98,000社超の実績を持つ。</p>
+        </div>
+        <div class="speaker-card fade-up">
+          <div class="speaker-icon"><img src="https://zeals.ai/jp/wp-content/themes/zeals2021-child/assets/images/logo_zeals_white.svg" alt="ZEALS ロゴ"></div>
+          <span class="speaker-category cat-ai">AI Chat</span>
+          <h3 class="speaker-name">ZEALS</h3>
+          <p class="speaker-company">株式会社ZEALS（ジールス）</p>
+          <p class="speaker-desc">LINEやInstagramなどのチャットインターフェースを活用し、生成AIによる接客体験のデジタル化を推進。AIエージェント事業およびチャットコマース事業を展開し、エンタープライズ企業を中心に400社以上に導入。</p>
+        </div>
+        <div class="speaker-card fade-up">
+          <div class="speaker-icon"><img src="https://storage.googleapis.com/production-os-assets/assets/1e0cab76-faf7-4a27-8361-d1d6e050c793" alt="ABABA ロゴ"></div>
+          <span class="speaker-category cat-hr">HRTech</span>
+          <h3 class="speaker-name">ABABA</h3>
+          <p class="speaker-company">株式会社ABABA</p>
+          <p class="speaker-desc">就職活動の「過程」を評価するHRTechスタートアップ。最終面接まで進んだ就活生に他企業からスカウトが届く新卒採用プラットフォームを運営。AI面接サービス「REALME」も展開。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Track Record (マッチング実績) ===== -->
+  <section class="track-record" id="track-record">
+    <div class="container">
+      <div class="track-record-header fade-up">
+        <span class="section-label">Track Record</span>
+        <h2 class="section-title">F Venturesのマッチング実績</h2>
+        <p class="section-lead">これまでF Venturesは都内のAI/DXスタートアップを福岡の地元経営者にマッチングし、多くの事業連携を実現してきました。</p>
+      </div>
+
+      <div class="track-record-grid">
+        <div class="track-record-card fade-up">
+          <span class="track-record-tag">WorkTech × 地方企業</span>
+          <h3 class="track-record-company">株式会社タイミー</h3>
+          <p class="track-record-desc">スキマバイトマッチングサービス「タイミー」を福岡の地元企業に紹介。飲食・小売・物流など幅広い業種で人手不足の課題解決に貢献し、福岡エリアでの導入企業拡大を支援。</p>
+          <p class="track-record-result">福岡エリアの地元企業への導入・マッチングを推進</p>
+        </div>
+        <div class="track-record-card fade-up">
+          <span class="track-record-tag">AI Chat × 地方企業</span>
+          <h3 class="track-record-company">株式会社ZEALS（ジールス）</h3>
+          <p class="track-record-desc">AIチャットコマースによる接客DXを福岡の地元企業へ展開。LINEを活用した顧客コミュニケーションの自動化・最適化により、地方企業のデジタル接客導入を推進。</p>
+          <p class="track-record-result">福岡の地元経営者とのマッチング・事業連携を実現</p>
+        </div>
+        <div class="track-record-card fade-up">
+          <span class="track-record-tag">HRTech × 地方企業</span>
+          <h3 class="track-record-company">株式会社ABABA</h3>
+          <p class="track-record-desc">新卒採用プラットフォーム「ABABA」を福岡の地元企業へ紹介。就活の過程を評価する独自の仕組みにより、地方企業の採用力強化と優秀な学生のマッチングを支援。</p>
+          <p class="track-record-result">福岡エリアの企業採用DX推進に貢献</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Program ===== -->
+  <section class="program" id="program">
+    <div class="container">
+      <div class="program-header fade-up">
+        <span class="section-label">Program</span>
+        <h2 class="section-title">3つのセッションで構成</h2>
+        <p class="section-lead">ピッチ・トークセッション・交流会の3部構成で、学びと出会いの場を提供します。</p>
+      </div>
+
+      <div class="program-cards">
+        <div class="program-card fade-up">
+          <span class="program-card-part">Part 1</span>
+          <div class="program-card-time">14:05 - 14:55</div>
+          <h3 class="program-card-title">スタートアップ<br>ピッチ</h3>
+          <p class="program-card-desc">タイミー・ZEALS・ABABAなど、AI/DX領域で活躍するスタートアップによるプレゼンテーション。最新のプロダクトとソリューションをご紹介します。</p>
+          <span class="program-card-duration">50 min</span>
+        </div>
+        <div class="program-card fade-up">
+          <span class="program-card-part">Part 2</span>
+          <div class="program-card-time">15:05 - 15:40</div>
+          <h3 class="program-card-title">AI×DX事例<br>トークセッション</h3>
+          <p class="program-card-desc">実際のAI・DX導入事例をもとに、課題解決のアプローチや成功のポイントをディスカッション。</p>
+          <span class="program-card-duration">35 min</span>
+        </div>
+        <div class="program-card fade-up">
+          <span class="program-card-part">Part 3</span>
+          <div class="program-card-time">15:45 - 16:30</div>
+          <h3 class="program-card-title">交流会</h3>
+          <p class="program-card-desc">スタートアップと地元企業の皆さまが直接対話できるネットワーキングの時間。具体的な連携の第一歩を踏み出しましょう。</p>
+          <span class="program-card-duration">45 min</span>
+        </div>
+      </div>
+
+      <div class="timetable fade-up">
+        <h3 class="timetable-title">タイムテーブル</h3>
+        <div class="timetable-item">
+          <div class="timetable-time">14:00 - 14:05</div>
+          <div class="timetable-content">オープニング</div>
+        </div>
+        <div class="timetable-item">
+          <div class="timetable-time">14:05 - 14:55</div>
+          <div class="timetable-content">
+            第一部：スタートアップピッチ
+            <div class="timetable-detail">株式会社タイミー / 株式会社ZEALS / 株式会社ABABA</div>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <div class="timetable-time">14:55 - 15:05</div>
+          <div class="timetable-content timetable-break">休憩</div>
+        </div>
+        <div class="timetable-item">
+          <div class="timetable-time">15:05 - 15:40</div>
+          <div class="timetable-content">第二部：AI×DX事例トークセッション</div>
+        </div>
+        <div class="timetable-item">
+          <div class="timetable-time">15:40 - 15:45</div>
+          <div class="timetable-content timetable-break">休憩・会場転換</div>
+        </div>
+        <div class="timetable-item">
+          <div class="timetable-time">15:45 - 16:30</div>
+          <div class="timetable-content">第三部：交流会</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Outline ===== -->
+  <section class="outline" id="outline">
+    <div class="container">
+      <div class="outline-header fade-up">
+        <span class="section-label">Outline</span>
+        <h2 class="section-title">開催概要</h2>
+      </div>
+      <div class="outline-card fade-up">
+        <div class="outline-table">
+          <div class="outline-row">
+            <div class="outline-label">イベント名</div>
+            <div class="outline-value">OITA AI/DX CONNECT 2026</div>
+          </div>
+          <div class="outline-row">
+            <div class="outline-label">日時</div>
+            <div class="outline-value">2026年4月○○日 14:00〜16:30</div>
+          </div>
+          <div class="outline-row">
+            <div class="outline-label">会場</div>
+            <div class="outline-value">大分市内（調整中）</div>
+          </div>
+          <div class="outline-row">
+            <div class="outline-label">共催</div>
+            <div class="outline-value">株式会社エフベンチャーズ（F Ventures）<br>社会保険労務士法人 HRTrust</div>
+          </div>
+          <div class="outline-row">
+            <div class="outline-label">登壇企業</div>
+            <div class="outline-value">株式会社タイミー<br>株式会社ZEALS（ジールス）<br>株式会社ABABA</div>
+          </div>
+          <div class="outline-row">
+            <div class="outline-label">参加費</div>
+            <div class="outline-value">無料</div>
+          </div>
+          <div class="outline-row">
+            <div class="outline-label">対象</div>
+            <div class="outline-value">
+              AI/DXスタートアップ企業<br>
+              大分県内の企業・自治体関係者<br>
+              DX推進に関心のある方
+            </div>
+          </div>
+          <div class="outline-row">
+            <div class="outline-label">定員</div>
+            <div class="outline-value">100名（先着順）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta" id="entry">
+    <div class="container">
+      <div class="cta-inner fade-up">
+        <span class="section-label">Entry</span>
+        <h2 class="cta-title">参加申込受付中</h2>
+        <p class="cta-desc">AI/DXの最前線に触れ、大分の未来を共に創るチャンスをお見逃しなく。お気軽にご参加ください。</p>
+        <a href="#" class="btn-cta">参加申込フォームへ</a>
+        <p class="cta-note">※ 申込フォームは外部サイトに遷移します</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><span>OITA AI/DX CONNECT</span></div>
+          <p class="footer-desc">AI/DXスタートアップと大分の地元企業をつなぐマッチングイベント。株式会社エフベンチャーズと社会保険労務士法人 HRTrustの共催でお届けします。</p>
+        </div>
+        <div class="footer-contact">
+          <h4 class="footer-heading">Contact</h4>
+          <p>イベントに関するお問い合わせは<br>下記までご連絡ください。</p>
+          <p>共催：株式会社エフベンチャーズ（F Ventures）<br>社会保険労務士法人 HRTrust</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 OITA AI/DX CONNECT. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Header scroll effect =====
+    const header = document.getElementById('header');
+    const onScroll = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 40);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ===== Mobile menu =====
+    const hamburger = document.getElementById('hamburger');
+    const headerNav = document.getElementById('headerNav');
+    const navOverlay = document.getElementById('navOverlay');
+
+    const toggleMenu = () => {
+      const isOpen = hamburger.classList.toggle('is-open');
+      headerNav.classList.toggle('is-open', isOpen);
+      navOverlay.classList.toggle('is-active', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
+
+    hamburger.addEventListener('click', toggleMenu);
+    navOverlay.addEventListener('click', toggleMenu);
+
+    // Close menu on nav link click
+    headerNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (hamburger.classList.contains('is-open')) {
+          toggleMenu();
+        }
+      });
+    });
+
+    // ===== Scroll animation (IntersectionObserver) =====
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    fadeElements.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
